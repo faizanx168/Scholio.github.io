@@ -8,6 +8,7 @@
 .all {
   font-family: "Playfair Display", serif;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -48,6 +49,7 @@
 }
 
 .headerReg {
+  margin-top: 30px;
   color: white;
   border-bottom: 1px solid #f0f0f0;
   background-color: rgb(14, 83, 129);
