@@ -1,7 +1,4 @@
 
-
-
-
 const form = document.getElementById('form');
 const date = document.getElementById('date');
 const grade = document.getElementById('grade');
@@ -25,15 +22,11 @@ function checkInputs() {
 	const passwordValue = password.value.trim();
 	const password2Value = password2.value.trim();
 	
-	// if(usernameValue === '') {
-	// 	setErrorFor(username, 'Zip Code cannot be blank');
-	// } else {
-	// 	setSuccessFor(username);
-	// }	
+
 	if(gradeValue === '') {
 		setErrorFor(grade, 'Grade cannot be blank');
 	} else {
-		setSuccessFor(gra``);
+		setSuccessFor(grade);
 	}
 
 	if(dateValue === '') {
@@ -83,6 +76,7 @@ function setErrorFor(input, message) {
 function setSuccessFor(input) {
 	const formControl = input.parentElement;
 	formControl.className = 'form-control success';
+	localStorage.href = "register2.php"
 }
 	
 function isEmail(email) {

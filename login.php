@@ -28,7 +28,7 @@
 	<div class="headerLog">
 		<h2>Login!</h2>
 	</div>
-	<form id="formReg" class="formReg">
+	<form id="form" class="formReg">
 	<div class="form-control">
 			<label for="username">Email</label>
 			<input type="email" placeholder="email" id="email" />
@@ -42,7 +42,7 @@
 		</div>
         <button class="btn">Submit</button>
 <br>			
-<a href="register.html" id="signup" class="signup">Dont have an account? Register!</a>
+<a href="register.php" id="signup" class="signup">Dont have an account? Register!</a>
 
                 </form>
 </div>

@@ -28,7 +28,7 @@
 	<div class="headerReg">
 		<h2>Create Account!</h2>
 	</div>
-	<form id="formReg" class="formReg">
+	<form id="form" class="formReg">
 		<div class="form-control">
 			<label for="username">Grade</label>
 			<select id="grade" class="grade">
@@ -77,7 +77,7 @@
 			<small>Error message</small>
 
 		</div>
-		<button class="btn">Submit</button>
+		<button class="btn" id="myButtion">Submit</button>
 		<br><br><a href="login.html" id="signup" class="signup">Already have an account? Login!</a>
 
 	</form>

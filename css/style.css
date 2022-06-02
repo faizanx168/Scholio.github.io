@@ -129,7 +129,9 @@ img{
  }
  .why{
 position: relative;
-top: 20vh;
+top: 12rem;
+min-height: 100%;
+
 }
 .whyContainer{
     height: 700px;
@@ -139,6 +141,8 @@ top: 20vh;
     align-items: center;
     gap: 50px;
     padding: 20px;
+    padding-bottom: 100px;
+  
 }
 .whyImage img{
     height: 20rem;
@@ -244,15 +248,16 @@ tbody{
     align-items: center;
     display: flex;
 }
+
 .foot {
-   height: 15rem;
-    display: flex;
-    flex-direction: column;
     position: relative;
+    top: 4rem;
+    display: flex;
+    clear: both;
+    min-height: 250px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    top: 4rem;
-    clear: both;
     text-align: center;
     margin: 0px auto;
     padding-bottom: 20px;
