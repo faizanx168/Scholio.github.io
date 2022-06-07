@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir = "ltr">
 <head>
@@ -18,7 +19,7 @@
 
     </div>
     <script>
-        $.get("nav.html", function(data){
+        $.get("nav.php", function(data){
             $("#nav-placeholder").replaceWith(data);
         });
         </script>

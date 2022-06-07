@@ -1,3 +1,35 @@
+<?php 
+
+include "nav.php";
+
+$msg='';
+if (isset($_POST['submit'])){
+
+    open_Con();
+       $user=$_POST["email"];
+        $psw=$_POST["password"];
+        $sql = "SELECT * FROM students where Email='".$user."' and password='".$psw."'" ;
+        $result = mysqli_query(  open_Con(), $sql);
+        
+        if (mysqli_num_rows($result)!=0) {
+        if ($row=mysqli_fetch_assoc($result)) {
+    
+			$_SESSION['user']=$row['Email'];
+            header('location: index.php');
+
+        } else {
+           $msg= "Incorrect username or password.";
+        }}
+         close_Con();
+    }else{
+		unset($_SESSION['user']);
+	}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,34 +46,36 @@
     <script src="https://kit.fontawesome.com/1ca0d34845.js" crossorigin="anonymous"></script>
 	<script src="//code.jquery.com/jquery.min.js"></script>
 </head>
-<body>
-    <div id="nav-placeholder">
 
-    </div>
-    <script>
-        $.get("nav.html", function(data){
-            $("#nav-placeholder").replaceWith(data);
-        });
-        </script>
+<body>
+<div id="nav-placeholder">
+
+</div>
+<script>
+    $.get("nav.php", function(data){
+        $("#nav-placeholder").replaceWith(data);
+    });
+    </script>
    <div class="all">
 <div class="containerLog">
 	<div class="headerLog">
 		<h2>Login!</h2>
 	</div>
-	<form id="form" class="formReg">
+	<form id="form" action="" method="POST" class="formReg">
 	<div class="form-control">
 			<label for="username">Email</label>
-			<input type="email" placeholder="email" id="email" />
+			<input type="email" name="email" placeholder="email" id="email" />
 			<small>Error message</small>
 		</div>
         <div class="form-control">
 			<label for="username">Password </label>
-			<input type="password" placeholder="Password" id="password"/>
+			<input type="password" name="password" placeholder="Password" id="password"/>
 			<small>Error message</small>
 
 		</div>
-        <button class="btn">Submit</button>
-<br>			
+       
+        <button name="submit" class="btn">Submit</button>
+<br>		 <label style="color:red"><?php  echo $msg; ?></label>	<br>
 <a href="register.php" id="signup" class="signup">Dont have an account? Register!</a>
 
                 </form>
@@ -50,8 +84,7 @@
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
-<script src="login.js"></script>
-</div>
+
 <div id="foot-placeholder">
 
     

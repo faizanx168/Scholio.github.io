@@ -1,7 +1,85 @@
 <?php
 include 'connection.php';
-?>
+session_start();
 
+if (isset($_POST['sb1']) || isset($_POST['sb2']) || isset($_POST['sb3'])|| isset($_POST['sb4']) || isset($_POST['sb5'])){
+$sql="INSERT INTO `scholio2`.`students`
+(`id`,
+`Date`,
+`Zipcode`,
+`Email`,
+`password`,
+`Fname`,
+`Lname`,
+`Sex`,
+`Gpa`,
+`Street`,
+`Apartment`,
+`City`,
+`State`,
+`Number`,
+`Citizen`,
+`Academic`,
+`Artistic`,
+`Military`,
+`Financial`,
+`Family`,
+`Highschool`,
+`Act`,
+`Race`,
+`Ethnicity`,
+`Religion`,
+`Disabilities`,
+`Interest`,
+`StudentOrg`,
+`HonorOrg`,
+`msg1`,
+`msg2`,
+`msg3`)
+SELECT `id`,
+`Date`,
+`Zipcode`,
+`Email`,
+`password`,
+`Fname`,
+`Lname`,
+`Sex`,
+`Gpa`,
+`Street`,
+`Apartment`,
+`City`,
+`State`,
+`Number`,
+`Citizen`,
+`Academic`,
+`Artistic`,
+`Military`,
+`Financial`,
+`Family`,
+`Highschool`,
+`Act`,
+`Race`,
+`Ethnicity`,
+`Religion`,
+`Disabilities`,
+`Interest`,
+`StudentOrg`,
+`HonorOrg`,
+`msg1`,
+`msg2`,
+`msg3` FROM `scholio`.`students` where Email='".$_SESSION['user']."'";
+     if (mysqli_query(open_Con(), $sql)) {
+       header("location: payment.html");
+    } else {
+    ECHO  "Error: " . $sql . "<br>" . mysqli_error(open_Con());
+    }
+}
+?>
+<script>
+function myFunction() {
+   alert("Please make a payement");
+  }
+</script>
 <!DOCTYPE html>
 <html lang="en" dir = "ltr">
 <head>
@@ -24,7 +102,7 @@ include 'connection.php';
 
     </div>
     <script>
-        $.get("nav.html", function(data){
+        $.get("nav.php", function(data){
             $("#nav-placeholder").replaceWith(data);
         });
         </script>
@@ -34,7 +112,7 @@ include 'connection.php';
             <img src="./Images/7.png" alt="Italian Trulli">
         </div>
     </div>
-
+<form action="" method="post">
     <div class="desc">
         <div class="desc-1">
             <br><br>
@@ -54,7 +132,7 @@ include 'connection.php';
             • Students with GPA of 3.0 and above are encouraged to submit a scholarship application (scroll down to Apply Now) where an interview will be required<br>
             </p>
             <br><br>
-            <button class="button-85" role="button">Submit</button><br><br>
+            <button onclick="myFunction()" type="submit" name="sb1" class="button-85" role="button">Submit</button><br><br>
         </div>
     </div>
     <br><br>
@@ -75,7 +153,7 @@ include 'connection.php';
             -> Attend CUNY before attending any other post secondary institution<br>
             </p>
             <br><br>
-            <button class="button-85" role="button">Submit</button><br><br>
+            <button onclick="myFunction()" type="submit" name="sb2" class="button-85" role="button">Submit</button><br><br>
         </div>
     </div>
     <br><br>
@@ -98,7 +176,7 @@ include 'connection.php';
             -> execute a Service Contract agreeing to reside and work in the field of Science, Technology, Engineering or Mathematics in NYS for five years. View the terms and conditions of the service contract.<br>
             </p>
             <br><br>
-            <button class="button-85" role="button">Submit</button><br><br>
+            <button onclick="myFunction()" type="submit" name="sb3" class="button-85" role="button">Submit</button><br><br>
         </div>
     </div>
     <br><br>
@@ -117,7 +195,7 @@ include 'connection.php';
             or The New York Times Company and its subsidiaries are not eligible for The New York Times College Scholarship.<br>
             </p>
             <br><br>
-            <button class="button-85" role="button">Submit</button><br><br>
+            <button onclick="myFunction()" type="submit" name="sb4" class="button-85" role="button">Submit</button><br><br>
         </div>
     </div>
     <br><br>
@@ -137,7 +215,7 @@ include 'connection.php';
             --We will consider applicants with family income up to $95,000. Last year’s cohort of new college scholarship recipients had a median family income of approximately $35,000.
             </p>
             <br><br>
-            <button class="button-85" role="button">Submit</button><br><br>
+            <button onclick="myFunction()" type="submit" name="sb5" class="button-85" role="button">Submit</button><br><br>
         </div>
     </div>
     <br><br>
@@ -158,13 +236,14 @@ include 'connection.php';
             ->The Education Matters Scholarship winner will be notified by email or phone on or around.<br>
             </p>
             <br><br>
-            <button class="button-85" role="button">Submit</button><br><br>
+            <button onclick="myFunction()" type="submit" name="sb6" class="button-85" role="button">Submit</button><br><br>
         </div>
     </div>
     <br><br>
     <div id="foot-placeholder">
 
 </div>
+</form>
 <script>
     $.get("foot.html", function(data){
         $("#foot-placeholder").replaceWith(data);

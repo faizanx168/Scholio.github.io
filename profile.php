@@ -1,3 +1,30 @@
+
+<?php
+include "connection.php";
+session_start();
+
+  if (!isset($_SESSION['user'])){
+
+
+
+    header("location: index.php");
+}
+
+if (isset($_POST['submit'])){
+
+    $sql="UPDATE  students SET Fname='".$_POST['fname']."',Lname='".$_POST['lname']."',Email='".$_POST['Email']."',Number='".$_POST['phone']."',
+    Street='".$_POST['address']."',msg1='".$_POST['message1']."',
+    msg2='".$_POST['message2']."',msg3='".$_POST['message3']."' where Email='".$_SESSION['user']."'";
+ 
+    if (mysqli_query(open_Con(), $sql)) {
+       
+} else {
+ECHO  "Error: " . $sql . "<br>" . mysqli_error(open_Con());
+}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +40,14 @@
 </head>
 
 <body>
+<div id="nav-placeholder">
+
+</div>
+<script>
+    $.get("nav.php", function(data){
+        $("#nav-placeholder").replaceWith(data);
+    });
+    </script>
     <?php
     //form validation
     // define variables and set to empty values
@@ -94,28 +129,27 @@
         return $data;
     }
     ?>
-    <div id="nav-placeholder">
-
-    </div>
-    <script>
-        $.get("nav.html", function(data){
-            $("#nav-placeholder").replaceWith(data);
-        });
-        </script>
+  
     <div class="container profileContainer">
     <img src="./Images/user-icon.png" id="icon" alt="User" /><br>
     <p id="welcome">Please complete this section for application process</p><br>
+
+    <?php 
+    	$sql = "select * from scholio.students where Email='".$_SESSION['user']."'";
+        $result = mysqli_query(open_Con(), $sql);
+ while($std=mysqli_fetch_assoc($result)){
+    ?>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="inputWrap">
-        LastName: <input type="text" name="lname" class="profileClass" />
+        LastName: <input type="text" name="lname" value="<?php echo $std['Lname']; ?>" class="profileClass" />
             <span class="error">* <?php echo $lnameErr; ?></span><br>
-            FirstName: <input type="text" name="fname" class="profileClass" />
+            FirstName: <input type="text" name="fname" value="<?php echo $std['Fname']; ?>" class="profileClass" />
             <span class="error">* <?php echo $fnameErr; ?></span><br>
-            Email: <input type="email" name="email" class="profileClass" />
+            Email: <input type="email" value="<?php echo $std['Email']; ?>" name="Email" class="profileClass" />
             <span class="error">* <?php echo $emailErr; ?></span><br>
-            Phone Number: <input type="number" name="phone" class="profileClass" />
+            Phone Number: <input type="number" value="<?php echo $std['Number']; ?>" name="phone" class="profileClass" />
             <span class="error">* <?php echo $phoneErr; ?></span><br>
-            Address: <input type="address" name="address" class="profileClass" />
+            Address: <input type="address" name="address" value="<?php echo $std['Street']; ?>" class="profileClass" />
             <span class="error">* <?php echo $addErr; ?></span><br><br>
             Gender:
             <input type="radio" name="gender" <?php if (isset($gender) && $gender == "female") echo "checked"; ?> value="female">Female
@@ -124,15 +158,17 @@
             <span class="error">* <?php echo $genderErr; ?></span>
             <br><br>
               
-            Write short essay on Career & Goals [300 max]: <br><textarea name="message" rows="10" cols="60" class="textbox"></textarea>
+            Write short essay on Career & Goals [300 max]: <br><textarea name="message1" value="<?php echo $std['msg1']; ?>" rows="10" cols="60" class="textbox"></textarea>
             <span class="error">* <?php echo $messageErr; ?></span><br><br><br>
-            Write short essay on Award & Achievement [300 max]: <br><textarea name="message" rows="10" cols="60"  class="textbox"></textarea>
+            Write short essay on Award & Achievement [300 max]: <br><textarea name="message2" value="<?php echo $std['msg2']; ?>" rows="10" cols="60"  class="textbox"></textarea>
             <span class="error">* <?php echo $messageErr; ?></span><br><br><br>
-            Write short essay on how geeting this Scholarhsip will help you [300 max]: <br><textarea name="message" rows="10" cols="60"  class="textbox"></textarea>
+            Write short essay on how geeting this Scholarhsip will help you [300 max]: <br><textarea name="message3"  value="<?php echo $std['msg3']; ?>" rows="10" cols="60"  class="textbox"></textarea>
             <span class="error">* <?php echo $messageErr; ?></span><br><br><br>
             <input type="submit" name="submit" value="Submit" id="profileSubmit" class="btn"> <br><br>
         </div> 
-        </form>
+        </form><?php 
+    }
+        ?>
     </div>
    
 </body>
